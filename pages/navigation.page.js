@@ -16,12 +16,12 @@ export class navigation {
 
   //actions
 
-  async navigateToIntegration() {
+  async navigateToIntegrationTab() {
     await this.integrationBtn.click();
     await this.page.waitForTimeout(5000);
   }
 
-  async navigateToApp(givenApp) {
+  async navigateToApplication(givenApp) {
     const apps = await this.page.$$(this.integratedApps);
     let i = 0;
     for (let app of apps) {
@@ -34,10 +34,10 @@ export class navigation {
     }
   }
 
-  async verifyTheApp(givenApp) {
+  async verifyTheAppIsConnected(givenApp) {
     const aboutPara = await this.aboutPara.textContent();
 
-    if ((await this.connectBtn.isHidden())) {
+    if (!(await this.connectBtn.isHidden())) {
       const connectText = await this.connectBtn.textContent();
 
       if (connectText.startsWith("Connect")) {

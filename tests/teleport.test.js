@@ -13,6 +13,7 @@ test.beforeAll( async ({browser})=>{
     navigate = new navigation(page);
 
     await login.goTo(constant.URL);
+    await login.doLogin(constant.userName, constant.passWord);
 })
 
 test.afterAll(async()=>{
@@ -22,19 +23,20 @@ test.afterAll(async()=>{
 
 test.describe('teleport connected', () => {
     
-    test('verify login', async () => {
-        await login.doLogin(constant.userName, constant.passWord);
+    test('verify login profile name', async () => {
+       
         await expect(await login.verifyProfileName()).toEqual(constant.profileName);
+        //await  navigate.navigateToIntegrationTab();
+        await navigate.navigateToApplication(constant.appName);
+        await navigate.verifyTheAppIsConnected(constant.appName);
 
     });
 
 
-    test('navigate to integration and apps tab', async () => {
-        await  navigate.navigateToIntegration();
+    // test('navigate to application & checking whether is connected or not', async () => {
 
-        await navigate.navigateToApp(constant.appName);
-        await navigate.connectionCheck(constant.appName);
-    });
+        
+    // });
 
   
 });

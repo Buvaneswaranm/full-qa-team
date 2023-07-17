@@ -16,6 +16,7 @@ test.beforeAll(async ({ browser }) => {
   booking = new bookingAppointment(page);
 
   await login.goTo(constant.URL);
+  await login.doLogin(constant.userName, constant.passWord);
 });
 
 test.afterAll(async () => {
@@ -24,8 +25,9 @@ test.afterAll(async () => {
 });
 
 test.describe("login and booking appoinment", () => {
+
   test("verify login using valid credentials", async () => {
-    await login.doLogin(constant.userName, constant.passWord);
+    
     await expect(await login.verifyProfileName()).toEqual(constant.profileName);
   });
 

@@ -17,7 +17,7 @@ export class loginPage {
     await this.loginBtn.click();
   }
 
-  async goTo(URL) {
+  async navigateToURL(URL) {
     await this.page.goto(URL);
   }
 

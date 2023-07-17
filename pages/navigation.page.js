@@ -21,7 +21,7 @@ export class navigation {
     await this.page.waitForTimeout(5000);
   }
 
-  async navigateToApplication(givenApp) {
+  async navigateToApplicationAccordingToGiven(givenApp) {
     const apps = await this.page.$$(this.integratedApps);
     let i = 0;
     for (let app of apps) {

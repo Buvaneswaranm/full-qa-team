@@ -86,17 +86,19 @@ export class bookingAppointment {
  
   }
 
-
-  async bookTime(price, time){
+  async fillCost(price){
     await this.cost.clear();
     await this.cost.fill(price);
+  }
+
+  async serviceDuration( time){
     await this.duration.clear();
     await this.duration.fill(time);
     await this.selectMinHrs.click();
     await this.hrs.click();
   }
 
-  async bookAppointmentService1(givenHour) {
+  async appointmentTiming(givenHour) {
     await this.startTime.click();
     const setTimeElements = await this.page.$$(this.setTime);
     let i = 0;
@@ -154,7 +156,7 @@ export class bookingAppointment {
     }
   }
 
-  async addguest(guestMailId) {
+  async verifyGuestAvailableOrAddGuest(guestMailId) {
     await this.addcustomer.clear();
     await this.addcustomer.fill(guestMailId);
     await this.addGuestsTab.click();

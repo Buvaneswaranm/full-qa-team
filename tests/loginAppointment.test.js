@@ -15,7 +15,7 @@ test.beforeAll(async ({ browser }) => {
   dateSelect = new dateSelectPage(page);
   booking = new bookingAppointment(page);
 
-  await login.goTo(constant.URL);
+  await login.navigateToURL(constant.URL);
   await login.doLogin(constant.userName, constant.passWord);
 });
 
@@ -25,13 +25,11 @@ test.afterAll(async () => {
 });
 
 test.describe("login and booking appoinment", () => {
-
   test("verify login using valid credentials", async () => {
-    
     await expect(await login.verifyProfileName()).toEqual(constant.profileName);
   });
 
-  test("select of year, month, date", async () => {
+  test("select year, month, date", async () => {
     await dateSelect.viewTypeSelect();
     await dateSelect.selectMonthYear(constant.month, constant.year);
     await dateSelect.selectDate(constant.year, constant.month, constant.date);
@@ -40,8 +38,9 @@ test.describe("login and booking appoinment", () => {
   test("book appoinment with given credentials", async () => {
     //await booking.bookAppointmentService(constant.cost, constant.hours , constant.serviceName);
     await booking.bookService(constant.serviceName);
-    await booking.bookTime(constant.cost, constant.hours);
-    await booking.bookAppointmentService1(constant.time);
+    await booking.fillCost(constant.cost);
+    await booking.serviceDuration(constant.hours);
+    await booking.appointmentTiming(constant.time);
     await booking.recurringLists(constant.recurringShift);
     await booking.customSelect(
       constant.counts,
@@ -53,7 +52,7 @@ test.describe("login and booking appoinment", () => {
       constant.endRepeatNum,
       constant.recurringShift
     );
-    await booking.addguest(constant.guestId);
+    await booking.verifyGuestAvailableOrAddGuest(constant.guestId);
     await booking.teleport(constant.needed);
     await booking.notes(constant.message);
     await booking.create();

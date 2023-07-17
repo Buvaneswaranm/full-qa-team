@@ -34,7 +34,7 @@ test.describe('teleport connected', () => {
 
         await navigate.navigateToApp(constant.appName);
         await navigate.connectionCheck(constant.appName);
-    })
+    });
 
   
 });

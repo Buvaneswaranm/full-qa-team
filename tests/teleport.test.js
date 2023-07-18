@@ -1,6 +1,6 @@
 import { loginPage } from "../pages/login.page.js";
 import { test, expect } from "@playwright/test";
-import { navigation } from "../pages/navigation.page.js";
+import { teleportconnectionChecking } from "../pages/teleportConnection.page.js";
 const constant = require("../constant.js");
 
 let page;
@@ -10,7 +10,7 @@ let navigate;
 test.beforeAll(async ({ browser }) => {
   page = await browser.newPage();
   login = new loginPage(page);
-  navigate = new navigation(page);
+  navigate = new teleportconnectionChecking(page);
 
   await login.navigateToURL(constant.URL);
   await login.doLogin(constant.userName, constant.passWord);

@@ -1,4 +1,4 @@
-export class navigation {
+export class teleportconnectionChecking {
   // locator
   constructor(page) {
     this.page = page;

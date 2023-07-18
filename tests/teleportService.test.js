@@ -1,6 +1,6 @@
 import { loginPage } from "../pages/login.page.js";
 import { test, expect } from "@playwright/test";
-import {teleportconnectionChecking} from '../pages/teleportConnection.page'
+import { teleportconnectionChecking } from "../pages/integration.page.js";
 const constant = require("../constant.js");
 
 let page;

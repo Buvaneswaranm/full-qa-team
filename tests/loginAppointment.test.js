@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { loginPage } from "../pages/login.page.js";
-import { dateSelectPage } from "../pages/dateSelect.page.js";
+import { dateSelectPage } from "../pages/view.page.js";
 import { bookingAppointment } from "../pages/booking.page.js";
 const constant = require("../constant.js");
 

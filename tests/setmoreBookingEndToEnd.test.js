@@ -1,9 +1,9 @@
 import { test, expect } from "@playwright/test";
 import { loginPage } from "../pages/login.page";
-import { teleportconnectionChecking } from "../pages/teleportConnection.page";
+import { teleportconnectionChecking } from "../pages/integration.page";
 import { validatingbookingService } from "../pages/bookService.page";
 const constant = require("../constant.js");
-const constantSetmoreTest = require('../constantSetmoreTest.js')
+const constantSetmoreTest = require("../constantSetmoreTest.js");
 
 let page;
 let login;
@@ -40,15 +40,23 @@ test.describe("teleport connected", () => {
     await expect(constant.profileName).toBe(profileName);
   });
 
-  test.only("verify can we book any duration", async () => {
+  test("verify can we book any time duration", async () => {
     await bookService.selectAppointmentDate();
     await bookService.selectAppointment();
-    await bookService.fillCost(constantSetmoreTest.costForService );
+    await bookService.fillCost(constantSetmoreTest.costForService);
     await bookService.fillDuration(constantSetmoreTest.durationOfService);
     await bookService.addCustomerId(constantSetmoreTest.guestId);
-    //await bookService.createAppointment();
-    await bookService.validationHrsAndCreateBtn();
-
+    await bookService.validationHrsAndCreateBtn(
+      constantSetmoreTest.durationOfService
+    );
   });
 
+  test("verify the teleport link is available", async () => {
+    await bookService.selectAppointmentDate();
+    await bookService.selectAppointment();
+    const teleportText = await bookService.VerifyTeleportLinkAvailable();
+
+    await expect.soft(await teleportText).toBe("Teleport");
+    await bookService.createAppointment();
+  });
 });

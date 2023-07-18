@@ -3,6 +3,7 @@ import { loginPage } from "../pages/login.page";
 import { teleportconnectionChecking } from "../pages/teleportConnection.page";
 import { validatingbookingService } from "../pages/bookService.page";
 const constant = require("../constant.js");
+const constantSetmoreTest = require('../constantSetmoreTest.js')
 
 let page;
 let login;
@@ -39,10 +40,15 @@ test.describe("teleport connected", () => {
     await expect(constant.profileName).toBe(profileName);
   });
 
-  test("verify can we book any duration", async () => {
+  test.only("verify can we book any duration", async () => {
     await bookService.selectAppointmentDate();
     await bookService.selectAppointment();
-    await bookService.fillCost();
-    await bookService.fillDuration();
+    await bookService.fillCost(constantSetmoreTest.costForService );
+    await bookService.fillDuration(constantSetmoreTest.durationOfService);
+    await bookService.addCustomerId(constantSetmoreTest.guestId);
+    //await bookService.createAppointment();
+    await bookService.validationHrsAndCreateBtn();
+
   });
+
 });

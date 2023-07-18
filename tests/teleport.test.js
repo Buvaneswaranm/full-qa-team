@@ -5,7 +5,7 @@ const constant = require("../constant.js");
 
 let page;
 let login;
-let navigate;
+let teleportCheck;
 
 test.beforeAll(async ({ browser }) => {
   page = await browser.newPage();

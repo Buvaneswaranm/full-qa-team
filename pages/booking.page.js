@@ -19,9 +19,7 @@ export class bookingAppointment {
     );
     this.cost = page.locator("#input-cost");
     this.duration = page.locator('[class="awd-input cursor-text"]');
-    this.selectMinHrs = page.locator(
-      '[class="awd-dropdown-btn awd-btn awd-btn-tertiary awd-btn--sm icon-right as-input show-arrow-onhover"]'
-    );
+    this.selectMinHrs = page.locator('[data-testid="service-class-duration-dropdown"]');
     this.mins = page.locator("#mins");
     this.hrs = page.locator("#hrs");
     this.startTime = page.locator("#start-time-input");
@@ -163,9 +161,7 @@ export class bookingAppointment {
     await this.addcustomer.click();
 
      const cusCheck = await this.addNewCus.textContent();
-      //await this.page.waitForTimeout(2000);
-
-    //if(await cusCheck== 'Add new customer')
+     
     if(await cusCheck.isVisible)
     {
      await  this.addNewCus.click();
@@ -176,7 +172,7 @@ export class bookingAppointment {
       await this.selectCustomer.click();
       console.log(this.selectCustomer);
       await this.addGuestsTab.click();
-     // await this.addcustomer.click();
+ 
     }
    
   }

@@ -12,7 +12,7 @@ export class teleportconnectionChecking {
       '[class="awd-btn awd-btn-primary awd-btn--sm mt-2 fx fx-justify-center activateBtn "]'
     );
     this.aboutPara = page.locator('[class="awd-text--sm awd-tc-grey--700"]');
-    this.closeTab = page.locator('[class="ml-3"]+[class="nostyle close-btn"]');
+    this.closeTabBtn = page.locator('[class="ml-3"]+[class="nostyle close-btn"]');
   }
 
   //actions
@@ -63,7 +63,7 @@ export class teleportconnectionChecking {
 
 
     async closeTab(){
-        await this.closeTab().click();
+        await this.closeTabBtn.click();
       }
 }
 

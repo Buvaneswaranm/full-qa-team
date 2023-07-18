@@ -1,6 +1,6 @@
 import { loginPage } from "../pages/login.page.js";
 import { test, expect } from "@playwright/test";
-import { teleportconnectionChecking } from "../pages/teleportConnection.page.js";
+import {teleportconnectionChecking} from '../pages/teleportConnection.page'
 const constant = require("../constant.js");
 
 let page;
@@ -10,7 +10,7 @@ let navigate;
 test.beforeAll(async ({ browser }) => {
   page = await browser.newPage();
   login = new loginPage(page);
-  navigate = new teleportconnectionChecking(page);
+  teleportCheck = new teleportconnectionChecking(page);
 
   await login.navigateToURL(constant.URL);
   await login.doLogin(constant.userName, constant.passWord);
@@ -26,8 +26,8 @@ test.describe("teleport connected", () => {
   });
 
   test.only("navigate to application & checking whether is connected or not", async () => {
-    await navigate.navigateToIntegrationTab();
-    await navigate.navigateToApplicationAccordingToGiven(constant.appName);
-    await navigate.verifyTheAppIsConnected(constant.appName);
+    await teleportCheck.navigateToIntegrationTab();
+    await teleportCheck.navigateToApplicationAccordingToGiven(constant.appName);
+    await teleportCheck.verifyTheAppIsConnected(constant.appName);
   });
 });

@@ -7,7 +7,7 @@ export class loginPage {
     this.loginBtn = page.locator("#sm-login-btn");
     this.profile = page.locator("#profile-name");
     this.profileName = page.getByTestId("staffname-Buvaneswaran");
-    this.calendarBtn = page.locator('#sidebar-app-calendar');
+    this.calendarBtn = page.locator("#sidebar-app-calendar");
   }
 
   //actions
@@ -27,7 +27,7 @@ export class loginPage {
     return await this.profileName.textContent();
   }
 
-  async navigateToCalendar(){
+  async navigateToCalendar() {
     await this.calendarBtn.click();
   }
 }

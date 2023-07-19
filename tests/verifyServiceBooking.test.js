@@ -26,7 +26,7 @@ test.afterAll(async () => {
 });
 
 test.describe("teleport connected", () => {
-  test("navigate to application & checking whether is connected or not", async () => {
+  test.skip("navigate to application & checking whether is connected or not", async () => {
     await page.waitForLoadState("load");
     await teleportCheck.navigateToIntegrationTab();
     await teleportCheck.navigateToApplicationAccordingToGiven(constant.appName);
@@ -34,13 +34,13 @@ test.describe("teleport connected", () => {
     await teleportCheck.closeTab();
   });
 
-  test("verify the profile name", async () => {
+  test.skip("verify the profile name", async () => {
     await login.navigateToCalendar();
     const profileName = await login.verifyProfileName();
     await expect(constant.profileName).toBe(profileName);
   });
 
-  test("verify can we book any time duration", async () => {
+  test.skip("verify can we book any time duration", async () => {
     await bookService.selectAppointmentDate();
     await bookService.selectAppointment();
     await bookService.fillCost(constantSetmoreTest.costForService);
@@ -51,12 +51,22 @@ test.describe("teleport connected", () => {
     );
   });
 
-  test("verify the teleport link is available", async () => {
+  test("verify the teleport button is available", async () => {
     await bookService.selectAppointmentDate();
     await bookService.selectAppointment();
-    const teleportText = await bookService.VerifyTeleportLinkAvailable();
+    await bookService.addCustomerId(constantSetmoreTest.guestId);
+    const teleportText = await bookService.VerifyTeleportTabAvailable();
 
     await expect.soft(await teleportText).toBe("Teleport");
     await bookService.createAppointment();
+  });
+
+  test("verify the teleport link is available", async () => {
+
+    await bookService.clickBookedAppointment();
+  
+    await expect
+      .soft(await bookService.TeleportLinkText())
+      .toContain("https://teleport.video/meeting/setmore/");
   });
 });

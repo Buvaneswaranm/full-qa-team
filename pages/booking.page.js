@@ -6,7 +6,7 @@ export class bookingAppointment {
     this.class = page.locator("#Class");
     this.event = page.locator("#Event");
     this.selectService = page.locator("#service-class-title-input");
-    this.chooseService = '[data-testid="service-class-list"] li' ;
+    this.chooseService = '[data-testid="service-class-list"] li';
     this.serviceClick = page.locator('[data-testid="service-class-list"] li');
     this.fifteenMinsMeeting = page.locator(
       "#scheduleId_b8e9fefd-2c42-41ee-a563-5bc7361e4f21"
@@ -19,7 +19,9 @@ export class bookingAppointment {
     );
     this.cost = page.locator("#input-cost");
     this.duration = page.locator('[class="awd-input cursor-text"]');
-    this.selectMinHrs = page.locator('[data-testid="service-class-duration-dropdown"]');
+    this.selectMinHrs = page.locator(
+      '[data-testid="service-class-duration-dropdown"]'
+    );
     this.mins = page.locator("#mins");
     this.hrs = page.locator("#hrs");
     this.startTime = page.locator("#start-time-input");
@@ -52,19 +54,21 @@ export class bookingAppointment {
     this.addGuestsTab = page
       .locator('[class="icon-pic-wrapper widget-left-icon fx-no-shrink"]')
       .nth(1);
-    this.teleportMouseHover = page.locator('[data-testid="app-widget-location-label"]');
-    this.teleportRemoveBtn = page.locator('[data-testid="app-widget-location-link-remove"]');
+    this.teleportMouseHover = page.locator(
+      '[data-testid="app-widget-location-label"]'
+    );
+    this.teleportRemoveBtn = page.locator(
+      '[data-testid="app-widget-location-link-remove"]'
+    );
     this.notesTab = page.locator(
       '[placeholder="Notes for provider and guest(s)"]'
     );
     this.createBtn = page.locator("#create");
-    this.addNewCus = page.locator('#add-new-customer');
-    this.newCusSaveBtn = page.locator('[class="awd-btn awd-btn-primary awd-btn--sm"]')
+    this.addNewCus = page.locator("#add-new-customer");
+    this.newCusSaveBtn = page.locator(
+      '[class="awd-btn awd-btn-primary awd-btn--sm"]'
+    );
   }
-   
-
-
-
 
   //actions
 
@@ -81,15 +85,14 @@ export class bookingAppointment {
       }
       i++;
     }
- 
   }
 
-  async fillCost(price){
+  async fillCost(price) {
     await this.cost.clear();
     await this.cost.fill(price);
   }
 
-  async serviceDuration( time){
+  async serviceDuration(time) {
     await this.duration.clear();
     await this.duration.fill(time);
     await this.selectMinHrs.click();
@@ -113,7 +116,7 @@ export class bookingAppointment {
     await this.recurringList.click();
 
     const recurrings = await this.page.$$(this.recurringContainers);
-    
+
     let i = 0;
     for (let recurring of recurrings) {
       const recurringText = await recurring.textContent();
@@ -148,7 +151,7 @@ export class bookingAppointment {
         this.neverEndRepeat.click();
       } else if (givenEndRepeat == "After:") {
         await this.afterEndRepeat.click();
-        await  this.afterInputEndRepeat.clear();
+        await this.afterInputEndRepeat.clear();
         await this.afterInputEndRepeat.fill(givenEndRepeatNum);
       }
     }
@@ -160,27 +163,22 @@ export class bookingAppointment {
     await this.addGuestsTab.click();
     await this.addcustomer.click();
 
-     const cusCheck = await this.addNewCus.textContent();
-     
-    if(await cusCheck.isVisible)
-    {
-     await  this.addNewCus.click();
-      await this.newCusSaveBtn.click();
+    const cusCheck = await this.addNewCus.textContent();
 
-    }else{
-      
+    if (await cusCheck.isVisible) {
+      await this.addNewCus.click();
+      await this.newCusSaveBtn.click();
+    } else {
       await this.selectCustomer.click();
       console.log(this.selectCustomer);
       await this.addGuestsTab.click();
- 
     }
-   
   }
 
   async teleport(need) {
     if (need == "No") {
-        const teleports =  await this.teleportMouseHover;
-        await teleports.hover();
+      const teleports = await this.teleportMouseHover;
+      await teleports.hover();
       await this.teleportRemoveBtn.click();
     }
     console.log("yes");

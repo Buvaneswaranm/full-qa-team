@@ -1,11 +1,9 @@
 import { expect } from "@playwright/test";
 
 export class validatingbookingService {
-
-
   constructor(page) {
     this.page = page;
-    this.selectDate = page.locator('[class="fc-daygrid-day-top"]').nth(21);
+    this.selectDate = page.locator('[class="fc-daygrid-day-top"]').nth(17);
     this.fifteenMinService = page.locator(
       "#scheduleId_b8e9fefd-2c42-41ee-a563-5bc7361e4f21"
     );
@@ -22,16 +20,18 @@ export class validatingbookingService {
       .locator('[class="icon-pic-wrapper widget-left-icon fx-no-shrink"]')
       .nth(1);
     this.createBtn = page.locator('[data-testid="app-widget-footer"] button');
-    this.teleportLink = page.locator('.fx-c.fx-center.hide-overflow.fx-grow.mh-24');
-
-
-
-
+    this.teleportLink = page.locator(
+      ".fx-c.fx-center.hide-overflow.fx-grow.mh-24"
+    );
+        this.bookedAppointments = page
+      .locator('[class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"]')
+      .nth(17);
+    this.appointmentLink = page.locator(
+      '[class="fx-c fx-center hide-overflow fx-grow mh-24"] a'
+    );
   }
 
-
-
-  //actions 
+  //actions
 
   async selectAppointmentDate() {
     await this.selectDate.click();
@@ -89,7 +89,17 @@ export class validatingbookingService {
     }
   }
 
-  async VerifyTeleportLinkAvailable(){
-        return await this.teleportLink.textContent();
+  async VerifyTeleportTabAvailable() {
+    return await this.teleportLink.textContent();
+  }
+
+  async clickBookedAppointment() {
+    await this.page.waitForTimeout(5000);
+    await this.bookedAppointments.click();
+  }
+
+  async TeleportLinkText() {
+   
+    return await this.appointmentLink.textContent();
   }
 }

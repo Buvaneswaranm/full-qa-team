@@ -13,7 +13,10 @@ test.beforeAll(async ({ browser }) => {
   teleportCheck = new teleportconnectionChecking(page);
 
   await login.navigateToURL(constant.URL);
+  await page.waitForTimeout(2000);
+  await page.screenshot({path: "screenshots/" + Date.now() + "loginpage.jpeg"} )
   await login.doLogin(constant.userName, constant.passWord);
+ 
 });
 
 test.afterAll(async () => {
@@ -25,9 +28,10 @@ test.describe("teleport connected", () => {
     await expect(await login.verifyProfileName()).toEqual(constant.profileName);
   });
 
-  test.only("navigate to application & checking whether is connected or not", async () => {
+  test("navigate to application & checking whether is connected or not", async () => {
     await teleportCheck.navigateToIntegrationTab();
     await teleportCheck.navigateToApplicationAccordingToGiven(constant.appName);
     await teleportCheck.verifyTheAppIsConnected(constant.appName);
+   
   });
 });

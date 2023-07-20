@@ -21,7 +21,11 @@ module.exports = {
   message: "be on time and check the camera once",
   serviceName: "30 Minutes Meeting",
   //30 Minutes Meeting , 15 Minutes Meeting , 60 Minutes Meeting
-  appName: "Instagram Bookings",
+  appName: "Teleport",
   /*TeleportConnected,ZoomTry Pro,Google MeetTry Pro,Facebook,Instagram Bookings,Instagram Streaming,Square,Stripe,PayPal,Cash,LawPay,Booking Widget,WordPress,Weebly,Wix,Joomla,Drupal,Jimdo,Squarespace,Shopify,Square Online,Google Calendar,Office 365 Calendar,Salesforce,Zoho CRM,Insightly
 ,QuickBooks,Constant Contact,Mailchimp,Mailerlite,HubSpot,Slack,Zendesk,Google Analytics,Gmail,Google Tag Manager,Keap,Zapier,AnswerConnect,Freshdesk,ServiceMinder,Clio,Intercom */
+
+
+
+
 };

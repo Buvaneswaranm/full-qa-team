@@ -15,6 +15,7 @@ export class teleportconnectionChecking {
     this.closeTabBtn = page.locator(
       '[class="ml-3"]+[class="nostyle close-btn"]'
     );
+    this.manageBtn = page.locator('[class="awd-btn awd-btn-secondary awd-btn--sm mt-2 fx fx-justify-center"]');
   }
 
   //actions
@@ -65,4 +66,10 @@ export class teleportconnectionChecking {
   async closeTab() {
     await this.closeTabBtn.click();
   }
+
+  async navigateToManageBtn(){
+    await this.manageBtn.click();
+  }
+
+
 }

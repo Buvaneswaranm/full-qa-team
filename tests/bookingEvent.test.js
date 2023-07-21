@@ -1,8 +1,8 @@
 
 import {test , expect } from  '@playwright/test'
-import {bookEvents} from '../pages/bookEvent.page'
-import { loginPage } from '../pages/login.page';
-import { validatingbookingService } from "../pages/bookService.page";
+import {BookEvents} from '../pages/bookEvent.page'
+import { LoginPage } from '../pages/login.page';
+import { ValidatingbookingService } from "../pages/bookService.page";
 const constant = require ('../constant.js')
 
 let page;
@@ -12,9 +12,9 @@ let login;
 
 test.beforeAll(async ({browser})=>{
     page = await browser.newPage();
-    events = new bookEvents(page)
-    login = new loginPage(page);
-    bookService = new validatingbookingService(page);
+    events = new BookEvents(page)
+    login = new LoginPage(page);
+    bookService = new ValidatingbookingService(page);
 
     await login.navigateToURL(constant.URL);
     await login.doLogin(constant.userName, constant.passWord);
@@ -30,6 +30,6 @@ test.describe('verify the event functionality',  () => {
     
     test('Book the event without any credentials', async () => {
         await  bookService.selectAppointmentDate();
-        await events.createEventWithoutAnyCredentials();
+        await events.createEventWithoutCredentials();
     });
 });

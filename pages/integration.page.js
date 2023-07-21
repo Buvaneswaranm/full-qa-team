@@ -1,10 +1,12 @@
-export class teleportconnectionChecking {
+const constants = require ("../constantSetmoreTest.js")
+export class TeleportconnectionChecking {
   // locator
   constructor(page) {
     this.page = page;
     this.integrationBtn = page.locator("#sidebar-app-integration");
     this.integratedApps = '[class="container"] li h6';
     this.integratedApp = page.locator('[class="container"] li');
+    this.calendarBtn = page.locator("#sidebar-app-calendar");
     this.disConnectBtn = page.locator(
       '[class="awd-btn awd-btn-tertiary awd-btn--sm fx fx-justify-center mt-auto "]'
     );
@@ -22,10 +24,10 @@ export class teleportconnectionChecking {
 
   async navigateToIntegrationTab() {
     await this.integrationBtn.click();
-    await this.page.waitForTimeout(5000);
+    await this.page.waitForTimeout(constants.hardWait);
   }
 
-  async navigateToApplicationAccordingToGiven(givenApp) {
+  async clickOnGivenApplication (givenApp) {
     const apps = await this.page.$$(this.integratedApps);
     let i = 0;
     for (let app of apps) {
@@ -38,7 +40,7 @@ export class teleportconnectionChecking {
     }
   }
 
-  async verifyTheAppIsConnected(givenApp) {
+  async verifyConnectionStatusOfApp(givenApp) {
     const aboutPara = await this.aboutPara.textContent();
 
     if (!(await this.connectBtn.isHidden())) {
@@ -63,12 +65,16 @@ export class teleportconnectionChecking {
     }
   }
 
-  async closeTab() {
+  async closeManageTab() {
     await this.closeTabBtn.click();
   }
 
   async navigateToManageBtn(){
     await this.manageBtn.click();
+  }
+
+  async navigateToCalendar() {
+    await this.calendarBtn.click();
   }
 
 

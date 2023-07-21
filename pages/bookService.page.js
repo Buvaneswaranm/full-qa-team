@@ -1,11 +1,17 @@
 import { expect } from "@playwright/test";
 
-export class validatingbookingService {
+export class ValidatingbookingService {
   constructor(page) {
     this.page = page;
     this.selectDate = page.locator('[class="fc-daygrid-day-top"]').nth(17);
     this.fifteenMinService = page.locator(
       "#scheduleId_b8e9fefd-2c42-41ee-a563-5bc7361e4f21"
+    );
+    this.thirtyMinsService = page.locator(
+      "#scheduleId_e345ade1-304b-49b0-8bb4-316d4cdcaad4"
+    );
+    this.sixtyMinsService = page.locator(
+      "#scheduleId_4432e372-44f0-4219-bbce-4d4fde72e650"
     );
     this.inputCost = page.locator("#input-cost");
     this.inputDuration = page.locator('[class="awd-input cursor-text"]');
@@ -23,12 +29,14 @@ export class validatingbookingService {
     this.teleportLink = page.locator(
       ".fx-c.fx-center.hide-overflow.fx-grow.mh-24"
     );
-        this.bookedAppointments = page
+    this.bookedAppointments = page
       .locator('[class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"]')
       .nth(17);
     this.appointmentLink = page.locator(
       '[class="fx-c fx-center hide-overflow fx-grow mh-24"] a'
     );
+    this.selectServiceTab = this.page.locator("#service-class-title-input");
+    this.teleportPlaceHolder = this.page.getByPlaceholder('Add video meeting link');
   }
 
   //actions
@@ -37,8 +45,20 @@ export class validatingbookingService {
     await this.selectDate.click();
   }
 
-  async selectAppointment() {
+  async selectServiceTabs() {
+    await this.selectServiceTab.click();
+  }
+
+  async selectFifteenMinsAppointment() {
     await this.fifteenMinService.click();
+  }
+
+  async selectThirtyMinsAppointment() {
+    await this.thirtyMinsService.click();
+  }
+
+  async selectSixtyMinsAppointment() {
+    await this.sixtyMinsService.click();
   }
 
   async fillCost(givenCost) {
@@ -54,7 +74,7 @@ export class validatingbookingService {
     await this.hrsDropDown.click();
   }
 
-  async addCustomerId(guestId) {
+  async updateCustomerId(guestId) {
     await this.addCustomer.click();
     await this.addCustomer.clear();
     await this.addCustomer.fill(guestId);
@@ -69,7 +89,7 @@ export class validatingbookingService {
     await this.createBtn.click();
   }
 
-  // async validationHrsAndCreateBtn(givenDuration){
+  // async validateDurationAndClickCreate(givenDuration){
   //     if(givenDuration<25){
   //      await  expect.soft(this.createBtn).toBeEnabled();
   //      console.log("the duration is less than 24")
@@ -79,7 +99,7 @@ export class validatingbookingService {
   //     }
   // }
 
-  async validationHrsAndCreateBtn(givenDuration) {
+  async validateDurationAndClickCreate(givenDuration) {
     if (givenDuration < 25) {
       await expect.soft(this.createBtn).toBeEnabled();
       console.log("the duration is less than 24");
@@ -89,17 +109,30 @@ export class validatingbookingService {
     }
   }
 
-  async VerifyTeleportTabAvailable() {
+  async getTeleportTabText() {
     return await this.teleportLink.textContent();
   }
 
-  async clickBookedAppointment() {
+  async getTeleportPlaceHolder(){
+    return await this.teleportPlaceHolder;
+  }
+
+  async clickOnBookedAppointment() {
     await this.page.waitForTimeout(5000);
     await this.bookedAppointments.click();
   }
 
-  async TeleportLinkText() {
-   
+  async getAppointmentLinkText() {
     return await this.appointmentLink.textContent();
+  }
+
+  async assertTeleportLinkPresent(){
+    const teleportText = await this.teleportLink.textContent();
+    expect.soft(await teleportText).toBe("Teleport");
+  }
+
+  async assertTeleportLinkAbsent(){
+    const teleportPlaceHolder = await this.teleportPlaceHolder;
+    expect(await teleportPlaceHolder.isVisible()).toBeTruthy();
   }
 }

@@ -1,4 +1,4 @@
-export class dateSelectPage {
+export class DateSelectPage {
   //locators
   constructor(page) {
     this.page = page;
@@ -16,12 +16,12 @@ export class dateSelectPage {
   }
 
   //actions
-  async viewTypeSelect() {
+  async selectViewTypeAndMonth() {
     await this.viewType.click();
     await this.viewMonth.click();
   }
 
-  async selectMonthYear(monthName, givenYear) {
+  async selectMonthAndYear(monthName, givenYear) {
     var year = await this.year.textContent();
 
     if (true) {

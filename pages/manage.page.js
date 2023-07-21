@@ -1,5 +1,5 @@
 const constant = require("../constantSetmoreTest.js")
-export class managePage {
+export class ManagePage {
   //locators
   constructor(page) {
     this.page = page;
@@ -33,43 +33,45 @@ export class managePage {
     this.sixtyMinToogleBtnOff = page.locator(
       '//*[text()="60 Minutes Meeting"]/ancestor::li/descendant::div[@class="awd-togg-btn "]'
     );
+    this.saveBtn = page.locator('//span[text()="Save"]');
+    this.linkAllContains = page.locator('//*[text()="Add video link to all"]/ancestor::*/child::*[contains(@class,"awd-togg-btn ")]')
   }
 
   //actions
 
-  async onLinkAllToggleBtn() {
+  async toggleLinkAllButtonOn(){
     return await this.linkAllToggleBtnOn;
   }
 
-  async offLinkAllToggleBtn() {
+  async toggleLinkAllButtonOff() {
     return await this.linkAllToggleBtnOff;
   }
 
-  async fifteenMinsServiceOn() {
+  async toggleFifteenMinServiceOn() {
     return await this.fifteenMinToogleBtnOn;
   }
 
-  async thirtyMinsServiceOn() {
+  async toggleThirtyMinServiceOn() {
     return await this.thirtyMinToogleBtnOn;
   }
 
-  async sixtyMinsServiceOn() {
+  async toggleSixtyMinServiceOn() {
     return await this.sixtyMinToogleBtnOn;
   }
 
-  async fifteenMinsServiceOff() {
+  async toggleFifteenMinServiceOff() {
     return await this.fifteenMinToogleBtnOff;
   }
 
-  async thirtyMinsServiceOff() {
+  async toggleThirtyMinServiceOff() {
     return await this.thirtyMinToogleBtnOff;
   }
 
-  async sixtyMinsServiceOff() {
+  async toggleSixtyMinServiceOff() {
     return await this.sixtyMinToogleBtnOff;
   }
 
-  async verifyAndOffTheLinkAllToggleBtn() {
+  async clickOffLinkAllToggleButton() {
     await this.page.waitForTimeout(constant.hardWait);
     if (await this.linkAllToggleBtnOn.isVisible()) {
       await this.linkAllToggleBtnOn.click();
@@ -78,9 +80,8 @@ export class managePage {
     }
   }
 
-  async verifyAndOnTheLinkAllToggleBtn() {
-    await this.page.waitForSelector(this.linkAllToggleBtnOffs);
-
+  async clickOnLinkAllToggleButton() {
+    await this.page.waitForTimeout(constant.hardWait);
     if (await this.linkAllToggleBtnOff.isVisible()) {
       await this.linkAllToggleBtnOff.click();
     } else if (!(await this.linkAllToggleBtnOff.isVisible())) {
@@ -93,43 +94,56 @@ export class managePage {
   //     return isOn;
   //   }
 
-  async fifteenMinsServiceClickOn() {
+  async clickOnFifteenMinsService() {
     await this.fifteenMinToogleBtnOff.click();
   }
 
-  async thirtyMinsServiceClickOn() {
+  async clickOnThirtyMinsService() {
     await this.thirtyMinToogleBtnOff.click();
   }
 
-  async sixtyMinsServiceClickOn() {
+  async clickOnSixtyMinsService() {
     await this.sixtyMinToogleBtnOff.click();
   }
 
-  async fifteenMinsServiceClickOff() {
+  async clickOffFifteenMinsService() {
     await this.fifteenMinToogleBtnOn.click();
   }
 
-  async thirtyMinsServiceClickOff() {
+  async clickOffThirtyMinsService() {
     await this.thirtyMinToogleBtnOn.click();
   }
 
-  async sixtyMinsServiceClickOff() {
+  async clickOffSixtyMinsService() {
     await this.sixtyMinToogleBtnOn.click();
   }
 
-  async fifteenMinsServiceDblClickOn() {
+  async doubleClickFifteenMinsService() {
     await this.fifteenMinToogleBtnOff.dblclick();
   }
 
-  async fifteenMinsServiceClickOnHoldRelease() {
+  async doubleClickLinkAllButton() {
+    await this.linkAllContains.dblclick();
+  }
+
+  async clickOnHoldFifteenMinsService() {
     const fifteenBtn = await this.fifteenMinToogleBtnOn
     await fifteenBtn.click({delay : constant.hardWait})
   }
 
-  async thirtyMinsServiceOffOnNTimes(loopCount) {
+  async turnOffOnThirtyMinsServiceNTimes(loopCount) {
     for (let i = 0; i <= loopCount; i++) {
-    await this.thirtyMinToogleBtnOn.click();  // 1 3 5
-    await this.thirtyMinToogleBtnOff.click(); // 2 4 6
+    await this.thirtyMinToogleBtnOn.click();  
+    await this.thirtyMinToogleBtnOff.click(); 
     }
   }
+
+  async saveChanges(){
+    await this.saveBtn.click();
+  }
+
+  async doubleClickSixtyMinsService() {
+    await this.sixtyMinToogleBtnOff.dblclick();
+  }
+
 }

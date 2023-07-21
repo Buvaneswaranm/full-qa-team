@@ -1,4 +1,4 @@
-export class bookingAppointment {
+export class BookingAppointment {
   //locators
   constructor(page) {
     this.page = page;
@@ -72,7 +72,7 @@ export class bookingAppointment {
 
   //actions
 
-  async bookService(givenService) {
+  async selectService(givenService) {
     await this.service.click();
     await this.selectService.click();
 
@@ -87,19 +87,19 @@ export class bookingAppointment {
     }
   }
 
-  async fillCost(price) {
+  async fillCostInput(price) {
     await this.cost.clear();
     await this.cost.fill(price);
   }
 
-  async serviceDuration(time) {
+  async setServiceDuration(time) {
     await this.duration.clear();
     await this.duration.fill(time);
     await this.selectMinHrs.click();
     await this.hrs.click();
   }
 
-  async appointmentTiming(givenHour) {
+  async selectAppointmentTiming(givenHour) {
     await this.startTime.click();
     const setTimeElements = await this.page.$$(this.setTime);
     let i = 0;
@@ -112,7 +112,7 @@ export class bookingAppointment {
     }
   }
 
-  async recurringLists(givenRecurring) {
+  async selectRecurringOption(givenRecurring) {
     await this.recurringList.click();
 
     const recurrings = await this.page.$$(this.recurringContainers);
@@ -127,7 +127,7 @@ export class bookingAppointment {
     }
   }
 
-  async customSelect(counts, givenrepeattext, recurringText) {
+  async customSelectRepeat(counts, givenrepeattext, recurringText) {
     if (recurringText == "Custom") {
       await this.customDate.clear();
       await this.customDate.fill(counts);
@@ -145,7 +145,7 @@ export class bookingAppointment {
     }
   }
 
-  async endRepeat(givenEndRepeat, givenEndRepeatNum, recurringText) {
+  async setEndRepeatOption(givenEndRepeat, givenEndRepeatNum, recurringText) {
     if (recurringText != "Does not repeat") {
       if (givenEndRepeat == "Never") {
         this.neverEndRepeat.click();
@@ -157,7 +157,7 @@ export class bookingAppointment {
     }
   }
 
-  async verifyGuestAvailableOrAddGuest(guestMailId) {
+  async verifyGuestAvailabilityOrAddGuest(guestMailId) {
     await this.addcustomer.clear();
     await this.addcustomer.fill(guestMailId);
     await this.addGuestsTab.click();
@@ -175,7 +175,7 @@ export class bookingAppointment {
     }
   }
 
-  async teleport(need) {
+  async toggleTeleport(need) {
     if (need == "No") {
       const teleports = await this.teleportMouseHover;
       await teleports.hover();
@@ -184,12 +184,12 @@ export class bookingAppointment {
     console.log("yes");
   }
 
-  async notes(msg) {
+  async addNotes(msg) {
     await this.notesTab.clear();
     await this.notesTab.fill(msg);
   }
 
-  async create() {
+  async clickCreate() {
     await this.createBtn.click();
   }
 }

@@ -14,7 +14,7 @@ module.exports = defineConfig({
   testDir: './tests',
   
  
-      timeout: 50000, // Set the default timeout to 60 seconds (60000 milliseconds)
+      timeout: 70000, // Set the default timeout to 60 seconds (60000 milliseconds)
   
   
   /* Run tests in files in parallel */

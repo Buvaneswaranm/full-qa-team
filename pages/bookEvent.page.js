@@ -1,7 +1,7 @@
 import {validatingbookingService} from '../pages/bookService.page'
 
 
-export class bookEvents{
+export class BookEvents{
 
     //locators 
     constructor(page){
@@ -13,7 +13,7 @@ export class bookEvents{
 
     //actions
 
-    async createEventWithoutAnyCredentials(){
+    async createEventWithoutCredentials(){
         const bookingService = new validatingbookingService(this.page);
         await this.eventBtn.click();
         await bookingService.createBtn.click();

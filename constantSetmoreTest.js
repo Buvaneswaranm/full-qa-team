@@ -3,5 +3,5 @@ module.exports = {
   durationOfService: "",
   costForService: "",
   hardWait : 5000,
-  loopCount : 100,
+  loopCount : 50,
 };
